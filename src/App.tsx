@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Outlet, RouterProvider, useRouteError } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import Header from '@/components/header';
@@ -7,6 +7,13 @@ import Home from '@/pages/home';
 import Podcast from '@/pages/podcast';
 import Category from '@/pages/category';
 import { AppProvider } from '@/store/app-state';
+
+function ErrorBoundary() {
+  const error = useRouteError();
+  console.error(error);
+  // Uncaught ReferenceError: path is not defined
+  return <div>Something went wrong!</div>;
+}
 
 const router = createBrowserRouter([
   {
@@ -19,6 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/podcast',
+        errorElement: <ErrorBoundary />,
         element: <Podcast />,
       },
       {

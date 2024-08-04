@@ -78,7 +78,7 @@ export default function Header() {
           <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             {categories.map((category, idx) => {
               return (
-                <li key={idx} className="text-foreground/60 hover:text-indigo-600">
+                <li key={idx} className="cursor-pointer text-foreground/60 hover:text-indigo-600">
                   <a onClick={() => navigateToCategory(category.slug)}>{category.title}</a>
                 </li>
               );

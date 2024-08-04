@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState, useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import { useOnClickOutside } from 'usehooks-ts';
 
 import { useAppContext } from '@/store/app-state';
 
@@ -7,19 +9,35 @@ import Logo from './logo';
 import ThemeToggle from './theme-toggle';
 
 export default function Header() {
+  const ref = useRef(null);
+
+  const navigate = useNavigate();
+
   const { categories } = useAppContext();
   const [state, setState] = useState(false);
 
+  const handleClickOutside = () => {
+    setState(false);
+  };
+
+  const navigateToCategory = (categoryId: string) => {
+    setState(false);
+    navigate(`/category/${categoryId}`);
+  };
+
+  useOnClickOutside(ref, handleClickOutside);
+
   return (
     <nav className="bg-background/98 fixed inset-x-0 top-0 z-50 w-full border-border/40 bg-background/95 text-gray-800 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:border-0">
-      <div className="mx-auto max-w-screen-xl items-center px-4 md:flex md:px-8">
+      <div className="mx-auto max-w-screen-xl items-center px-4 md:flex md:px-8" ref={ref}>
         <div className="flex items-center justify-between py-3 md:block">
           <NavLink to="/">
             <Logo className="block h-full w-auto" width={120} height={50} />
           </NavLink>
-          <div className="md:hidden">
+          <div className="flex gap-4 md:hidden">
+            <ThemeToggle />
             <button
-              className="rounded-md p-2 text-gray-700 outline-none focus:border focus:border-gray-400"
+              className="rounded-md p-2 text-foreground/60 outline-none hover:text-indigo-600 focus:border focus:border-gray-400"
               onClick={() => setState(!state)}
             >
               {state ? (
@@ -61,7 +79,7 @@ export default function Header() {
             {categories.map((category, idx) => {
               return (
                 <li key={idx} className="text-foreground/60 hover:text-indigo-600">
-                  <NavLink to={`/category/${category.slug}`}>{category.title}</NavLink>
+                  <a onClick={() => navigateToCategory(category.slug)}>{category.title}</a>
                 </li>
               );
             })}

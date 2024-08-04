@@ -34,7 +34,7 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       role="switch"
       aria-label="Toggle Theme"
-      className="text-foreground/60 hover:text-indigo-600"
+      className="rounded-md p-2 text-foreground/60 hover:text-indigo-600 focus:border focus:border-gray-400"
     >
       {isDarkMode ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}
     </button>

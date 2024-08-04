@@ -36,7 +36,7 @@ function Root() {
     <AppProvider>
       <QueryClientProvider client={queryClient}>
         <Header />
-        <div className="mx-auto max-w-[62rem] px-4 pt-16">
+        <div className="mx-auto max-w-[62rem] px-4 pt-32">
           <Outlet />
         </div>
         <Player />

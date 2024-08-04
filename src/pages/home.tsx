@@ -4,12 +4,12 @@ import Logo from '@/components/logo';
 
 export default function Home() {
   return (
-    <div className="items-center flex flex-col mt-8">
-      <div className="items-center flex text-6xl leading-none py-1">
+    <div className="mt-8 flex flex-col items-center">
+      <div className="flex items-center py-1 text-6xl leading-none">
         <div>
           <Logo className="h-24 w-24" />
         </div>
-        <div className="flow-root font-bold ml-3.5">Podcasts</div>
+        <div className="ml-3.5 flow-root font-bold">Podcasts</div>
       </div>
       <RSSForm />
     </div>
@@ -38,8 +38,7 @@ function RSSForm() {
   }
 
   function handleImFeelingLucky(event: MouseEvent<HTMLButtonElement>) {
-    const obsessedWithPodcast =
-      'https://podcasts.files.bbci.co.uk/p0742833.rss';
+    const obsessedWithPodcast = 'https://podcasts.files.bbci.co.uk/p0742833.rss';
     navigate('/podcast?rss=' + encodeURIComponent(obsessedWithPodcast));
     event.preventDefault();
   }
@@ -51,29 +50,26 @@ function RSSForm() {
   const disabled: boolean = !isValidUrl(rssFeed);
 
   return (
-    <form
-      className="w-full max-w-2xl items-center flex flex-col mt-8"
-      onSubmit={handleSubmit}
-    >
+    <form className="mt-8 flex w-full max-w-2xl flex-col items-center" onSubmit={handleSubmit}>
       <div className="mb-8 w-full">
         <input
-          className="w-full h-16 bg-white cursor-text inline-block text-[1.22rem] leading-7 py-5 px-8 border-[3px] border-gray-200 border-solid rounded-lg"
+          className="inline-block h-16 w-full cursor-text rounded-lg border-[3px] border-solid border-gray-200 bg-white px-8 py-5 text-[1.22rem] leading-7"
           placeholder="Enter a podcast RSS feed…"
           type="url"
           value={rssFeed}
           onChange={handleChange}
         />
       </div>
-      <div className="gap-[1.90rem] grid grid-cols-2 grid-rows-[3.06rem]">
+      <div className="grid grid-cols-2 grid-rows-[3.06rem] gap-[1.90rem]">
         <button
-          className="items-start bg-neutral-100 text-gray-300 text-[1.10rem] leading-6 text-center rounded p-3.5"
+          className="items-start rounded bg-neutral-100 p-3.5 text-center leading-6 text-gray-300"
           type="submit"
           disabled={disabled}
         >
           Play Podcast
         </button>
         <button
-          className="items-start bg-amber-300 cursor-pointer text-[1.10rem] leading-6 text-center rounded p-3.5"
+          className="cursor-pointer items-start rounded bg-amber-300 p-3.5 text-center leading-6"
           onClick={handleImFeelingLucky}
         >
           I'm Feeling Lucky

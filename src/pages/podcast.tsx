@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { PodcastItem } from '@/components/podcast-item';
 import Spinner from '@/components/spinner';
 import { useAppContext } from '@/store/app-state';
@@ -7,6 +7,8 @@ import { PodcastMeta } from '@/types';
 import parsePodcast from '@/utils/parser';
 import { useQuery } from '@tanstack/react-query';
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
+
+const baseUrl = import.meta.env.BASE_URL;
 
 const getPodcastByUrl = async (url: string): Promise<PodcastMeta | null> => {
   if (!url) return null;
@@ -46,7 +48,11 @@ export default function Podcast() {
     <div>
       <div className="mb-8 grid grid-cols-5 gap-6 text-gray-800">
         <div className="relative rounded">
-          <img className="h-auto w-full" src={data?.image || podcastDetail?.image} alt={title} />
+          <img
+            className="h-auto w-full"
+            src={data?.image || baseUrl + podcastDetail?.image}
+            alt={title}
+          />
         </div>
 
         <div className="col-start-2 col-end-[-1]">

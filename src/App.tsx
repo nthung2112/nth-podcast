@@ -15,27 +15,32 @@ function ErrorBoundary() {
   return <div>Something went wrong!</div>;
 }
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Root />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: '/podcast',
+          errorElement: <ErrorBoundary />,
+          element: <Podcast />,
+        },
+        {
+          path: '/category/:categoryId',
+          element: <Category />,
+        },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <Root />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: '/podcast',
-        errorElement: <ErrorBoundary />,
-        element: <Podcast />,
-      },
-      {
-        path: '/category/:categoryId',
-        element: <Category />,
-      },
-    ],
+    basename: import.meta.env.BASE_URL,
   },
-]);
+);
 
 const queryClient = new QueryClient();
 
@@ -44,7 +49,7 @@ function Root() {
     <AppProvider>
       <QueryClientProvider client={queryClient}>
         <Header />
-        <div className="mx-auto max-w-[62rem] px-4 pt-32">
+        <div className="mx-auto max-w-[62rem] px-4 pb-8 pt-24">
           <Outlet />
         </div>
         <Player />

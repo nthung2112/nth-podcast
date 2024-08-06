@@ -1,6 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import { useAppContext } from '@/store/app-state';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 export default function CategoryPage() {
   const { categoryId } = useParams();
   const { podcasts, categories } = useAppContext();
@@ -22,7 +24,7 @@ export default function CategoryPage() {
               }}
             >
               <div className="relative rounded">
-                <img className="h-auto w-full" src={podcast.image} alt={podcast.title} />
+                <img className="h-auto w-full" src={baseUrl + podcast.image} alt={podcast.title} />
               </div>
             </Link>
             <h2 className="my-3.5 break-words font-semibold">{podcast.title}</h2>

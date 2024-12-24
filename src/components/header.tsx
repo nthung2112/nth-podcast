@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, RefObject } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useOnClickOutside } from 'usehooks-ts';
@@ -25,7 +25,7 @@ export default function Header() {
     navigate(`/category/${categoryId}`);
   };
 
-  useOnClickOutside(ref, handleClickOutside);
+  useOnClickOutside(ref as unknown as RefObject<HTMLElement>, handleClickOutside);
 
   return (
     <nav className="bg-background/98 fixed inset-x-0 top-0 z-50 w-full border-border/40 bg-background/95 text-gray-800 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:border-0">

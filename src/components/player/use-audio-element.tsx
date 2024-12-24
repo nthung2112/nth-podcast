@@ -2,7 +2,7 @@ import usePlayerStore from '@/store/player-store';
 import { useEffect } from 'react';
 
 type AudioElementProps = {
-  audioElement: React.RefObject<HTMLAudioElement>;
+  audioElement: React.RefObject<HTMLAudioElement | null>;
 };
 
 export function useAudioElement({ audioElement }: AudioElementProps) {

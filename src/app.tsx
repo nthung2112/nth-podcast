@@ -11,7 +11,7 @@ import { AppProvider } from '@/store/app-state';
 function ErrorBoundary() {
   const error = useRouteError();
   console.error(error);
-  // Uncaught ReferenceError: path is not defined
+  // Uncaught Reference Error: path is not defined
   return <div>Something went wrong!</div>;
 }
 
